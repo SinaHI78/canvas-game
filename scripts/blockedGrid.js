@@ -57,6 +57,18 @@ const blockedGrid = [
     destRow: 12
   },
   {
+    destCol: 3,
+    destRow: 10
+  },
+  {
+    destCol: 3,
+    destRow: 11
+  },
+  {
+    destCol: 3,
+    destRow: 12
+  },
+  {
     destCol: 10,
     destRow: 5
   },
@@ -109,6 +121,22 @@ const blockedGrid = [
     destRow: 9
   },
   {
+    destCol: 11,
+    destRow: 13
+  },
+  {
+    destCol: 11,
+    destRow: 14
+  },
+  {
+    destCol: 11,
+    destRow: 15
+  },
+  {
+    destCol: 11,
+    destRow: 16
+  },
+  {
     destCol: 12,
     destRow: 13
   },
@@ -123,30 +151,6 @@ const blockedGrid = [
   {
     destCol: 12,
     destRow: 16
-  },
-  {
-    destCol: 13,
-    destRow: 13
-  },
-  {
-    destCol: 13,
-    destRow: 14
-  },
-  {
-    destCol: 13,
-    destRow: 15
-  },
-  {
-    destCol: 13,
-    destRow: 16
-  },
-  {
-    destCol: 16,
-    destRow: 5
-  },
-  {
-    destCol: 13,
-    destRow: 5
   },
   {
     destCol: 16,
@@ -166,10 +170,10 @@ const blockedGrid = [
   },
   {
     destCol: 19,
-    destRow: 15
+    destRow: 13
   },
   {
     destCol: 19,
-    destRow: 17
+    destRow: 15
   }
 ];

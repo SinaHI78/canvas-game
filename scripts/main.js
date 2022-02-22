@@ -14,6 +14,21 @@ playerSprite.src = '/images/Female 10-3.png';
 const clean = () => {
   context.clearRect(0, 0, width, height);
 };
+
+// function returns true when the tile is blocked (is contained in blockedGrid)
+// 
+function isTileBlocked(destCol, destRow) {
+  // 
+  for (let i = 0; i < blockedGrid.length; i++) {
+    if (
+      destCol === blockedGrid[i].destCol &&
+      destRow === blockedGrid[i].destRow
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
 class Character {
   constructor(col, row) {
     this.col = col;
@@ -48,20 +63,6 @@ class Character {
 
 function drawBackground() {
   context.drawImage(backgroundImage, 0, 0, width, height);
-}
-
-// function returns true when the tile is blocked (is contained in blockedGrid)
-function isTileBlocked(blockedGrid) {
-  for (let i = 0; i < blockedGrid.length; i++) {
-    if (
-      player.col === blockedGrid[i].destCol &&
-      player.row === blockedGrid[i].destRow
-    ) {
-      return true;
-    } else {
-      return false;
-    }
-  }
 }
 
 let player = new Character(0, 19);
@@ -109,12 +110,6 @@ window.addEventListener('keydown', (event) => {
   }
   drawEverything();
 });
-
-// initializing a new character that starts at random position
-const dog = new Character(
-  Math.floor(Math.random() * 20),
-  Math.floor(Math.random() * 20)
-);
 
 // declaring a new player that changes its look/image when moving
 /*function drawPlayer() {
