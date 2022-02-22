@@ -11,18 +11,6 @@ backgroundImage.src = '/images/level1.png';
 const playerSprite = new Image();
 playerSprite.src = '/images/Female 10-3.png';
 
-// grid that cannot be walked on
-const blockedGrid = [
-  {
-    col: 1,
-    row: 2
-  },
-  {
-    col: 2,
-    row: 2
-  }
-];
-
 const clean = () => {
   context.clearRect(0, 0, width, height);
 };
@@ -63,8 +51,17 @@ function drawBackground() {
 }
 
 // function returns true when the tile is blocked (is contained in blockedGrid)
-function isTileBlocked(destCol, destRow) {
-  return false;
+function isTileBlocked(blockedGrid) {
+  for (let i = 0; i < blockedGrid.length; i++) {
+    if (
+      player.col === blockedGrid[i].destCol &&
+      player.row === blockedGrid[i].destRow
+    ) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
 
 let player = new Character(0, 19);
