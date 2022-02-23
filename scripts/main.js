@@ -16,9 +16,10 @@ const clean = () => {
 };
 
 // function returns true when the tile is blocked (is contained in blockedGrid)
-// 
 function isTileBlocked(destCol, destRow) {
-  // 
+  // loop to iterate over all the objects in the array
+  // to check if each blocked tile coincides with
+  // the current position plus/minus 1 (the future position)
   for (let i = 0; i < blockedGrid.length; i++) {
     if (
       destCol === blockedGrid[i].destCol &&
@@ -28,37 +29,6 @@ function isTileBlocked(destCol, destRow) {
     }
   }
   return false;
-}
-class Character {
-  constructor(col, row) {
-    this.col = col;
-    this.row = row;
-    this.dir = 'down';
-  }
-  moveUp() {
-    if (player.row > 0 && !isTileBlocked(player.col, player.row - 1)) {
-      this.row -= 1;
-      this.dir = 'up';
-    }
-  }
-  moveRight() {
-    if (player.col < 19 && !isTileBlocked(player.col + 1, player.row)) {
-      this.col += 1;
-      this.dir = 'right';
-    }
-  }
-  moveDown() {
-    if (player.row < 19 && !isTileBlocked(player.col, player.row + 1)) {
-      this.row += 1;
-      this.dir = 'down';
-    }
-  }
-  moveLeft() {
-    if (player.col > 0 && !isTileBlocked(player.col - 1, player.row)) {
-      this.col -= 1;
-      this.dir = 'left';
-    }
-  }
 }
 
 function drawBackground() {
@@ -87,6 +57,12 @@ function drawEverything() {
   clean();
   drawBackground();
   drawPlayer();
+  dog.setRandomPosition();
+  drawDog();
+  dog.setRandomPosition();
+  drawDog();
+  dog.setRandomPosition();
+  drawDog();
 }
 
 window.addEventListener('keydown', (event) => {

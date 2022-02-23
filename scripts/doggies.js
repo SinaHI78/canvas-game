@@ -1,7 +1,6 @@
-class Doggies {
+class Doggies extends Character {
   constructor(col, row) {
-    this.col = col;
-    this.row = row;
+    super(col, row);
   }
   setRandomPosition() {
     this.col = Math.floor(Math.random() * 19);
@@ -9,16 +8,18 @@ class Doggies {
   }
 }
 
+let dog = new Doggies(16, 18);
+
 const doggieSprite = new Image();
 doggieSprite.src = '/images/PC Computer - Stardew Valley - Dog Blonde.png';
 
-function drawPlayer() {
-  let x = gridSize * player.col;
-  let y = gridSize * player.row;
+function drawDog() {
+  let x = gridSize * dog.col;
+  let y = gridSize * dog.row;
   context.drawImage(
-    playerSprite,
+    doggieSprite,
     0,
-    0,
+    256,
     gridSize,
     gridSize,
     x,
@@ -27,4 +28,3 @@ function drawPlayer() {
     gridSize
   );
 }
-dog.setRandomPosition();
