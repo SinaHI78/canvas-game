@@ -55,32 +55,36 @@ function drawPlayer() {
   );
 }
 
-/*const doggieMove = setInterval() {
-    switch (event.key) {
-    case Math.floor(Math.random) < 0,25:
-      player.moveLeft();
-      break;
-    case 'ArrowUp':
-      player.moveUp();
-      break;
-    case 'ArrowRight':
-      player.moveRight();
-      break;
-    case 'ArrowDown':
-      player.moveDown();
-      break;
+function doggieMove(dog) {
+  let randomNum = Math.random();
+  if (randomNum < 0.25) {
+    dog.moveLeft();
+  } else if (randomNum < 0.5) {
+    dog.moveRight();
+  } else if (randomNum < 0.75) {
+    dog.moveUp();
+  } else {
+    dog.moveDown();
   }
   drawEverything();
-});{
-  }, 1000);
+}
 
-  const drawScore = () => {
-    document.getElementById('score');
+function moveDog() {
+  doggieMove(dog1);
+  doggieMove(dog2);
+  doggieMove(dog3);
+  doggieMove(dog4);
+}
+
+setInterval(moveDog, 1500);
+
+/* const drawScore = () => {
+    document.getElementById('score').innerHTML = score;
     score++;
   }
 
   const drawTime = setInterval(function(){
-    document.getElementById('time').innerHTML = Time;
+    document.getElementById('time').innerHTML = time;
     time--;
   if (time === 0){
     clearInterval(interval);
@@ -93,12 +97,10 @@ function drawEverything() {
   clean();
   drawBackground();
   drawPlayer();
-  dog.setRandomPosition();
-  drawDog();
-  dog.setRandomPosition();
-  drawDog();
-  dog.setRandomPosition();
-  drawDog();
+  dog1.draw();
+  dog2.draw();
+  dog3.draw();
+  dog4.draw();
 }
 
 window.addEventListener('keydown', (event) => {
