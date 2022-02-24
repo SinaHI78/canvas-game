@@ -14,6 +14,17 @@ body {
 h3 {
   padding: 10px 10px 10px 10px;
 }
-#score {
-  
+
+.right {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.scoreTime {
+  border: 1px solid black;
+  width: 300px;
+  height: 180px;
 }

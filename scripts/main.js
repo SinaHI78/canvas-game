@@ -4,6 +4,8 @@ const context = canvas.getContext('2d');
 const width = 640;
 const height = 640;
 const gridSize = 32;
+let score = 0;
+let time = 60;
 
 // images
 const backgroundImage = new Image();
@@ -52,6 +54,40 @@ function drawPlayer() {
     gridSize
   );
 }
+
+/*const doggieMove = setInterval() {
+    switch (event.key) {
+    case Math.floor(Math.random) < 0,25:
+      player.moveLeft();
+      break;
+    case 'ArrowUp':
+      player.moveUp();
+      break;
+    case 'ArrowRight':
+      player.moveRight();
+      break;
+    case 'ArrowDown':
+      player.moveDown();
+      break;
+  }
+  drawEverything();
+});{
+  }, 1000);
+
+  const drawScore = () => {
+    document.getElementById('score');
+    score++;
+  }
+
+  const drawTime = setInterval(function(){
+    document.getElementById('time').innerHTML = Time;
+    time--;
+  if (time === 0){
+    clearInterval(interval);
+    alert("You're out of time!");
+  }
+}, 1000);
+}*/
 
 function drawEverything() {
   clean();
