@@ -7,15 +7,27 @@ const gridSize = 32;
 let score = 0;
 let time = 60;
 
-// images
+// images and sound
 const backgroundImage = new Image();
 backgroundImage.src = '/images/level1.png';
 const playerSprite = new Image();
 playerSprite.src = '/images/Female 10-3.png';
+const dogBark = new Audio('/sounds/mixkit-dog-barking-twice-1.wav');
+const bellRing = new Audio('/sounds/mixkit-relaxing-bell-chime-3109.wav');
 
 const clean = () => {
   context.clearRect(0, 0, width, height);
 };
+
+function updateScore() {
+  const scoreTag = document.getElementById('score');
+  scoreTag.innerHTML = score;
+}
+
+function updateTime() {
+  const timeTag = document.getElementById('time');
+  timeTag.innerHTML = time;
+}
 
 // function returns true when the tile is blocked (is contained in blockedGrid)
 function isTileBlocked(destCol, destRow) {
@@ -74,24 +86,23 @@ function moveDog() {
   doggieMove(dog2);
   doggieMove(dog3);
   doggieMove(dog4);
+  checkCollision();
+  drawEverything();
 }
 
-setInterval(moveDog, 1500);
+setInterval(moveDog, 1000);
 
-/* const drawScore = () => {
-    document.getElementById('score').innerHTML = score;
-    score++;
+function checkCollision() {
+  if (
+    (player.col === dog1.col && player.row === dog1.row) ||
+    (player.col === dog2.col && player.row === dog2.row) ||
+    (player.col === dog3.col && player.row === dog3.row) ||
+    (player.col === dog4.col && player.row === dog4.row)
+  ) {
+    score -= 5;
+    dogBark.play();
   }
-
-  const drawTime = setInterval(function(){
-    document.getElementById('time').innerHTML = time;
-    time--;
-  if (time === 0){
-    clearInterval(interval);
-    alert("You're out of time!");
-  }
-}, 1000);
-}*/
+}
 
 function drawEverything() {
   clean();
@@ -101,6 +112,15 @@ function drawEverything() {
   dog2.draw();
   dog3.draw();
   dog4.draw();
+  updateScore();
+  updateTime();
+}
+
+function playerActions() {
+  if (player.col === 5 && player.row === 7) {
+    score += 5;
+    bellRing.play();
+  }
 }
 
 window.addEventListener('keydown', (event) => {
@@ -121,7 +141,11 @@ window.addEventListener('keydown', (event) => {
     case 'ArrowDown':
       player.moveDown();
       break;
+    case 'Enter':
+      playerActions();
+      break;
   }
+  checkCollision();
   drawEverything();
 });
 
@@ -147,6 +171,19 @@ window.addEventListener('keydown', (event) => {
   };
 }*/
 
-window.addEventListener('load', (event) => {
+function onGameStart() {
+  const interval = setInterval(function () {
+    time--;
+    if (time === 0) {
+      clearInterval(interval);
+      alert("You're out of time!");
+    }
+  }, 1000);
+
+  
   drawEverything();
+}
+
+window.addEventListener('load', (event) => {
+  onGameStart();
 });

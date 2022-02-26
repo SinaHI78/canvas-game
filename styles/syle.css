@@ -13,6 +13,7 @@ body {
 
 h3 {
   padding: 10px 10px 10px 10px;
+  display: inline;
 }
 
 .right {
