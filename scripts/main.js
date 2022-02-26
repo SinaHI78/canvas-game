@@ -4,8 +4,7 @@ const context = canvas.getContext('2d');
 const width = 640;
 const height = 640;
 const gridSize = 32;
-let score = 0;
-let time = 60;
+const game = new Game(canvas);
 
 // images and sound
 const backgroundImage = new Image();
@@ -21,39 +20,21 @@ const clean = () => {
 
 function updateScore() {
   const scoreTag = document.getElementById('score');
-  scoreTag.innerHTML = score;
+  scoreTag.innerHTML = game.score;
 }
 
 function updateTime() {
   const timeTag = document.getElementById('time');
-  timeTag.innerHTML = time;
-}
-
-// function returns true when the tile is blocked (is contained in blockedGrid)
-function isTileBlocked(destCol, destRow) {
-  // loop to iterate over all the objects in the array
-  // to check if each blocked tile coincides with
-  // the current position plus/minus 1 (the future position)
-  for (let i = 0; i < blockedGrid.length; i++) {
-    if (
-      destCol === blockedGrid[i].destCol &&
-      destRow === blockedGrid[i].destRow
-    ) {
-      return true;
-    }
-  }
-  return false;
+  timeTag.innerHTML = game.time;
 }
 
 function drawBackground() {
   context.drawImage(backgroundImage, 0, 0, width, height);
 }
 
-let player = new Character(0, 19);
-
 function drawPlayer() {
-  let x = gridSize * player.col;
-  let y = gridSize * player.row;
+  let x = gridSize * game.player.col;
+  let y = gridSize * game.player.row;
   context.drawImage(
     playerSprite,
     0,
@@ -67,60 +48,32 @@ function drawPlayer() {
   );
 }
 
-function doggieMove(dog) {
-  let randomNum = Math.random();
-  if (randomNum < 0.25) {
-    dog.moveLeft();
-  } else if (randomNum < 0.5) {
-    dog.moveRight();
-  } else if (randomNum < 0.75) {
-    dog.moveUp();
-  } else {
-    dog.moveDown();
-  }
-  drawEverything();
-}
-
-function moveDog() {
-  doggieMove(dog1);
-  doggieMove(dog2);
-  doggieMove(dog3);
-  doggieMove(dog4);
-  checkCollision();
-  drawEverything();
-}
-
-setInterval(moveDog, 1000);
-
-function checkCollision() {
-  if (
-    (player.col === dog1.col && player.row === dog1.row) ||
-    (player.col === dog2.col && player.row === dog2.row) ||
-    (player.col === dog3.col && player.row === dog3.row) ||
-    (player.col === dog4.col && player.row === dog4.row)
-  ) {
-    score -= 5;
-    dogBark.play();
-  }
+function drawDog(dog) {
+  let x = gridSize * dog.col;
+  let y = gridSize * dog.row;
+  context.drawImage(
+    doggieSprite,
+    0,
+    256,
+    gridSize,
+    gridSize,
+    x,
+    y,
+    gridSize,
+    gridSize
+  );
 }
 
 function drawEverything() {
   clean();
   drawBackground();
   drawPlayer();
-  dog1.draw();
-  dog2.draw();
-  dog3.draw();
-  dog4.draw();
+  drawDog(game.dog1);
+  drawDog(game.dog2);
+  drawDog(game.dog3);
+  drawDog(game.dog4);
   updateScore();
   updateTime();
-}
-
-function playerActions() {
-  if (player.col === 5 && player.row === 7) {
-    score += 5;
-    bellRing.play();
-  }
 }
 
 window.addEventListener('keydown', (event) => {
@@ -130,23 +83,21 @@ window.addEventListener('keydown', (event) => {
   // React based on the key pressed
   switch (event.key) {
     case 'ArrowLeft':
-      player.moveLeft();
+      game.player.moveLeft();
       break;
     case 'ArrowUp':
-      player.moveUp();
+      game.player.moveUp();
       break;
     case 'ArrowRight':
-      player.moveRight();
+      game.player.moveRight();
       break;
     case 'ArrowDown':
-      player.moveDown();
+      game.player.moveDown();
       break;
     case 'Enter':
-      playerActions();
+      game.playerActions();
       break;
   }
-  checkCollision();
-  drawEverything();
 });
 
 // declaring a new player that changes its look/image when moving
@@ -171,19 +122,12 @@ window.addEventListener('keydown', (event) => {
   };
 }*/
 
-function onGameStart() {
-  const interval = setInterval(function () {
-    time--;
-    if (time === 0) {
-      clearInterval(interval);
-      alert("You're out of time!");
-    }
-  }, 1000);
-
-  
-  drawEverything();
+function loop() {
+  window.requestAnimationFrame(() => {
+    game.runLogic();
+    drawEverything();
+    loop();
+  });
 }
-
-window.addEventListener('load', (event) => {
-  onGameStart();
-});
+game.start();
+loop();
