@@ -2,9 +2,9 @@ class Game {
   constructor(canvas) {
     this.canvas = canvas;
     this.score = 0;
-    this.time = 60;
+    this.time = 120;
     this.context = canvas.getContext('2d');
-    this.player = new Character(this, 0, 19);
+    this.player = new Player(this, 0, 19);
     this.dog1 = new Doggies(canvas, 16, 18);
     this.dog2 = new Doggies(canvas, 5, 0);
     this.dog3 = new Doggies(canvas, 8, 10);
@@ -44,26 +44,32 @@ class Game {
 
   playerActions() {
     if (this.player.col === 5 && this.player.row === 7) {
-      this.score += 5;
-      bellRing.play();
+      if (bellRing.paused) {
+        this.score += 5;
+        bellRing.play();
+      }
     }
   }
 
   start() {
-    this.interval = setInterval( () =>{
+    this.time = 120;
+    this.interval = setInterval(() => {
       this.time--;
-      console.log(this.time)
       if (this.time === 0) {
-        clearInterval(this.interval);
-        alert("You're out of time!");
+        stopGame();
       }
     }, 1000);
-    setInterval(()=>{this.moveDog()}, 700);
+    this.dogInterval = setInterval(() => {
+      this.moveDog();
+    }, 700);
   }
 
-  runLogic() {
-    this.checkCollision();
+  stop() {
+    clearInterval(this.interval);
+    clearInterval(this.dogInterval);
   }
+
+  runLogic() {}
 
   doggieMove(dog) {
     let randomNum = Math.random();
@@ -83,5 +89,6 @@ class Game {
     this.doggieMove(this.dog2);
     this.doggieMove(this.dog3);
     this.doggieMove(this.dog4);
+    this.checkCollision();
   }
 }

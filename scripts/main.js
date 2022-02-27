@@ -1,5 +1,9 @@
 const canvas = document.querySelector('canvas');
 const context = canvas.getContext('2d');
+// screens
+const startScreen = document.getElementById('start-screen');
+const playingScreen = document.getElementById('playing-screen');
+const endScreen = document.getElementById('end-screen');
 
 const width = 640;
 const height = 640;
@@ -17,6 +21,48 @@ const bellRing = new Audio('/sounds/mixkit-relaxing-bell-chime-3109.wav');
 const clean = () => {
   context.clearRect(0, 0, width, height);
 };
+
+function startGame() {
+  startScreen.style.display = 'none';
+  playingScreen.style.display = '';
+  endScreen.style.display = 'none';
+  game.start();
+}
+
+function stopGame() {
+  startScreen.style.display = 'none';
+  playingScreen.style.display = 'none';
+  endScreen.style.display = '';
+  game.stop();
+  // set game end text
+  document.getElementById('final-score').innerHTML = game.score;
+  document.getElementById('realm').innerHTML = getRealm(game.score);
+}
+
+function getRealm(score) {
+  if (score < 0) {
+    return 'a hell being';
+  }
+  if (score < 50) {
+    return 'a hungry ghost';
+  }
+  if (score < 100) {
+    return 'an animal';
+  }
+  if (score < 150) {
+    return 'a human';
+  }
+  if (score < 200) {
+    return 'a half-god';
+  }
+  if (score < 250) {
+    return 'a god';
+  }
+  if (score < 300) {
+    return 'a bodhisattva';
+  }
+  return 'a buddha';
+}
 
 function updateScore() {
   const scoreTag = document.getElementById('score');
@@ -64,6 +110,26 @@ function drawDog(dog) {
   );
 }
 
+function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
+  return {
+    x: (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cp1x + t * t * ex,
+    y: (1 - t) * (1 - t) * sy + 2 * (1 - t) * t * cp1y + t * t * ey
+  };
+}
+
+function drawPrayerflags() {
+  context.beginPath();
+  context.moveTo(512, 25);
+  context.quadraticCurveTo(544, 33, 572, 25);
+  context.stroke();
+
+  let flagPosition = getQuadraticXY(0, 512, 25, 544, 33, 572, 25);
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.1, 512, 25, 544, 33, 572, 25);
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+}
+
 function drawEverything() {
   clean();
   drawBackground();
@@ -72,6 +138,7 @@ function drawEverything() {
   drawDog(game.dog2);
   drawDog(game.dog3);
   drawDog(game.dog4);
+  drawPrayerflags();
   updateScore();
   updateTime();
 }
@@ -129,5 +196,4 @@ function loop() {
     loop();
   });
 }
-game.start();
 loop();

@@ -8,46 +8,61 @@
     <link rel="stylesheet" href="/styles/syle.css" />
   </head>
   <body>
-    <!--<div class="screen" id="start-screen">
+    <div class="screen" id="start-screen">
       <h1>Karma Game</h1>
       <div class="explanation">
-      <h2>Earn karma points by performing buddhist rituals>/h2>
-        <p>In this game you have four different temples and some poles 
-          for hoisting prayerflags.</p>
-          <p>The temples with the blue roofs have to be dircumambulated - 
-            you have to walk the around the temple in clockwise direction.</p>
-            <p>Ring the bell with the 'enter' key in front of the temple with the bell.</p>
-            <p>Hoist prayer flags with 'enter' at the poles.</p>
-            <p>Set up butter lamps in the tall red temple with 'enter'.</p>
-            <h2>Don't run into dogs!</h2>
-            <h2>You have two minutes</h2>
-      <button>Start Game</button>
+        <h2>Earn karma points by performing buddhist rituals</h2>
+        <p>
+          In this game you have four different temples and some poles for
+          hoisting prayerflags.
+        </p>
+        <p>
+          The temples with the blue roofs have to be circumambulated - you have
+          to walk the around the temple in clockwise direction.
+        </p>
+        <p>
+          Ring the bell with the 'enter' key in front of the temple with the
+          bell.
+        </p>
+        <p>Hoist prayer flags with 'enter' at the poles.</p>
+        <p>Set up butter lamps in the tall red temple with 'enter'.</p>
+        <h2>Don't run into dogs!</h2>
+        <h2>You have two minutes</h2>
+        <button onclick="startGame()">Start Game</button>
+      </div>
     </div>
-  </div>
-    <div class="screen" id="playing-screen" style="display: none">-->
-    <canvas width="640" height="640"></canvas>
-    <!--</div>
-    <div class="screen" id="game-over-screen" style="display: none">
-      <h3>Game Over</h3>
-      <button>Try Again</button>
-    </div>-->
-    <div class="right">
-      <div id="image" width="200" height="200">
-        <img src="/images/P4150595 Kopie.JPG" width="300" />
+    <div class="screen" id="playing-screen" style="display: none">
+      <canvas width="640" height="640"></canvas>
+      <div class="right">
+        <div id="image" width="200" height="200">
+          <img src="/images/P4150595 Kopie.JPG" width="300" />
+        </div>
+        <div class="scoreTime">
+          <h3>Score:</h3>
+          <h3 id="score">0</h3>
+          <h3>Time left:</h3>
+          <h3 id="time">0</h3>
+        </div>
+        <div id="image" width="200" height="200">
+          <img src="/images/P4080079 Kopie.JPG" width="300" />
+        </div>
       </div>
-      <div class="scoreTime">
-        <h3>Score:</h3>
-        <h3 id="score">0</h3>
-        <h3>Time left:</h3>
-        <h3 id="time">0</h3>
-      </div>
-      <div id="image" width="200" height="200">
-        <img src="/images/P4080079 Kopie.JPG" width="300" />
+    </div>
+    <div class="screen" id="end-screen" style="display: none">
+      <h1>Karma Game</h1>
+      <div class="explanation">
+        <h2>Game over</h2>
+        <p>You will be reborn as</p>
+        <p id="realm"></p>
+        <p>Your score is</p>
+        <p id="final-score"></p>
+        <button onclick="startGame()">Restart Game</button>
       </div>
     </div>
     <script src="/scripts/blockedGrid.js"></script>
     <script src="/scripts/character.js"></script>
     <script src="/scripts/doggies.js"></script>
+    <script src="/scripts/player.js"></script>
     <script src="/scripts/game.js"></script>
     <script src="/scripts/main.js"></script>
   </body>
