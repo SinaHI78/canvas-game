@@ -41,27 +41,27 @@ function stopGame() {
 
 function getRealm(score) {
   if (score < 0) {
-    return 'a hell being';
+    return ' a hell being!';
   }
   if (score < 50) {
-    return 'a hungry ghost';
+    return ' a hungry ghost!';
   }
   if (score < 100) {
-    return 'an animal';
+    return ' an animal!';
   }
   if (score < 150) {
-    return 'a human';
+    return ' a human!';
   }
   if (score < 200) {
-    return 'a half-god';
+    return ' a half-god!';
   }
   if (score < 250) {
-    return 'a god';
+    return ' a god!';
   }
   if (score < 300) {
-    return 'a bodhisattva';
+    return ' a bodhisattva!';
   }
-  return 'a buddha';
+  return ' a buddha!';
 }
 
 function updateScore() {

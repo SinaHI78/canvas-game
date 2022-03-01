@@ -53,6 +53,9 @@ class Game {
 
   start() {
     this.time = 120;
+    this.score = 0;
+    this.player.col = 0;
+    this.player.row = 19;
     this.interval = setInterval(() => {
       this.time--;
       if (this.time === 0) {

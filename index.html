@@ -9,25 +9,22 @@
   </head>
   <body>
     <div class="screen" id="start-screen">
-      <h1>Karma Game</h1>
-      <div class="explanation">
-        <h2>Earn karma points by performing buddhist rituals</h2>
-        <p>
-          In this game you have four different temples and some poles for
-          hoisting prayerflags.
+      <div>
+        <h1 class="text">Karma Game</h1>
+        <h2 class="text">Earn good karma by performing buddhist rituals!</h2>
+        <p class="text">
+          In this game you have different temples and poles for hoisting
+          prayerflags.
         </p>
-        <p>
-          The temples with the blue roofs have to be circumambulated - you have
-          to walk the around the temple in clockwise direction.
+        <p class="text">
+          Ring the bell with the 'enter' key in front of the red small temple
+          with the bell in the middle of the field.
         </p>
-        <p>
-          Ring the bell with the 'enter' key in front of the temple with the
-          bell.
+        <p class="text">
+          Hoist prayer flags with 'enter' when you are at the poles.
         </p>
-        <p>Hoist prayer flags with 'enter' at the poles.</p>
-        <p>Set up butter lamps in the tall red temple with 'enter'.</p>
-        <h2>Don't run into dogs!</h2>
-        <h2>You have two minutes</h2>
+        <h2 class="text">And don't run into dogs!</h2>
+        <h2 class="text">You have two minutes</h2>
         <button onclick="startGame()">Start Game</button>
       </div>
     </div>
@@ -35,7 +32,7 @@
       <canvas width="640" height="640"></canvas>
       <div class="right">
         <div id="image" width="200" height="200">
-          <img src="/images/P4150595 Kopie.JPG" width="300" />
+          <img src="/images/DSCN0562 Kopie.JPG" width="300" />
         </div>
         <div class="scoreTime">
           <h3>Score:</h3>
@@ -44,18 +41,16 @@
           <h3 id="time">0</h3>
         </div>
         <div id="image" width="200" height="200">
-          <img src="/images/P4080079 Kopie.JPG" width="300" />
+          <img src="/images/P4150595 Kopie.JPG" width="300" />
         </div>
       </div>
     </div>
     <div class="screen" id="end-screen" style="display: none">
-      <h1>Karma Game</h1>
       <div class="explanation">
-        <h2>Game over</h2>
-        <p>You will be reborn as</p>
-        <p id="realm"></p>
-        <p>Your score is</p>
-        <p id="final-score"></p>
+        <h1>Karma Game</h1>
+        <h2>Game over!</h2>
+        <h2>You will be reborn as<span id="realm"></span></h2>
+        <h2>Your score is <span id="final-score"></span></h2>
         <button onclick="startGame()">Restart Game</button>
       </div>
     </div>
