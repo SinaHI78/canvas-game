@@ -3,6 +3,10 @@ class Game {
     this.canvas = canvas;
     this.score = 0;
     this.time = 120;
+    this.flag1 = false;
+    this.flag2 = false;
+    this.flag3 = false;
+    this.flag4 = false;
     this.context = canvas.getContext('2d');
     this.player = new Player(this, 0, 19);
     this.dog1 = new Doggies(canvas, 16, 18);
@@ -37,7 +41,7 @@ class Game {
       (this.player.col === this.dog4.col && //
         this.player.row === this.dog4.row)
     ) {
-      this.score -= 5;
+      this.score -= 10;
       dogBark.play();
     }
   }
@@ -49,11 +53,55 @@ class Game {
         bellRing.play();
       }
     }
+    if (
+      (this.player.col === 16 && this.player.row === 1) ||
+      (this.player.col === 17 && this.player.row === 1)
+    ) {
+      if (!this.flag1) {
+        this.score += 20;
+        this.flag1 = true;
+        //bellRing.play();
+      }
+    }
+    if (
+      (this.player.col === 15 && this.player.row === 2) ||
+      (this.player.col === 16 && this.player.row === 2)
+    ) {
+      if (!this.flag2) {
+        this.score += 20;
+        this.flag2 = true;
+        //bellRing.play();
+      }
+    }
+    if (
+      (this.player.col === 17 && this.player.row === 2) ||
+      (this.player.col === 18 && this.player.row === 2)
+    ) {
+      if (!this.flag3) {
+        this.score += 20;
+        this.flag3 = true;
+        //bellRing.play();
+      }
+    }
+    if (
+      (this.player.col === 16 && this.player.row === 3) ||
+      (this.player.col === 17 && this.player.row === 3)
+    ) {
+      if (!this.flag4) {
+        this.score += 20;
+        this.flag4 = true;
+        //bellRing.play();
+      }
+    }
   }
 
   start() {
     this.time = 120;
     this.score = 0;
+    this.flag1 = false;
+    this.flag2 = false;
+    this.flag3 = false;
+    this.flag4 = false;
     this.player.col = 0;
     this.player.row = 19;
     this.interval = setInterval(() => {

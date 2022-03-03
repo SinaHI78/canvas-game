@@ -93,6 +93,27 @@ function drawPlayer() {
     gridSize
   );
 }
+// declaring a new player that changes its look/image when moving
+/*function drawPlayer() {
+  const player = new Image();
+  if (player.dir === 'down') {
+    playerImage.onload = function () {
+      context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
+    };
+    player.src = '/images/Female 10-3.png';
+  } else if (player.dir === 'up') {
+    player.src = '/images/Female 10-3.png';
+  } else if (player.dir === 'right') {
+    player.src = '/images/Female 10-3.png';
+  } else if (player.dir === 'left') {
+    player.src = '/images/Female 10-3.png';
+  }
+  // the onload function is like the addEventListener to preload the image
+  // and then draw it
+  playerImage.onload = function () {
+    context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
+  };
+}*/
 
 function drawDog(dog) {
   let x = gridSize * dog.col;
@@ -117,17 +138,55 @@ function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
   };
 }
 
-function drawPrayerflags() {
+function drawFlag(x, y) {
   context.beginPath();
-  context.moveTo(512, 25);
-  context.quadraticCurveTo(544, 33, 572, 25);
+  context.moveTo(x, y);
+  context.quadraticCurveTo(x + 32, y + 15, x + 60, y);
   context.stroke();
 
-  let flagPosition = getQuadraticXY(0, 512, 25, 544, 33, 572, 25);
+  let flagPosition = getQuadraticXY(0.03, x, y, x + 32, y + 15, x + 60, y);
+  //context.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16);
+  context.fillStyle = '#3e77b9';
   context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
 
-  flagPosition = getQuadraticXY(0.1, 512, 25, 544, 33, 572, 25);
+  flagPosition = getQuadraticXY(0.2, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#e7dd6a';
   context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.325, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#3d5520';
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.465, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#a72f3f';
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.585, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#fafafa';
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.705, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#3e77b9';
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+
+  flagPosition = getQuadraticXY(0.825, x, y, x + 32, y + 15, x + 60, y);
+  context.fillStyle = '#e7dd6a';
+  context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
+}
+
+function drawPrayerflags() {
+  if (game.flag1) {
+    drawFlag(512, 25);
+  }
+  if (game.flag2) {
+    drawFlag(480, 57);
+  }
+  if (game.flag3) {
+    drawFlag(544, 57);
+  }
+  if (game.flag4) {
+    drawFlag(512, 89);
+  }
 }
 
 function drawEverything() {
@@ -166,28 +225,6 @@ window.addEventListener('keydown', (event) => {
       break;
   }
 });
-
-// declaring a new player that changes its look/image when moving
-/*function drawPlayer() {
-  const player = new Image();
-  if (player.dir === 'down') {
-    playerImage.onload = function () {
-      context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
-    };
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'up') {
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'right') {
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'left') {
-    player.src = '/images/Female 10-3.png';
-  }
-  // the onload function is like the addEventListener to preload the image
-  // and then draw it
-  playerImage.onload = function () {
-    context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
-  };
-}*/
 
 function loop() {
   window.requestAnimationFrame(() => {
