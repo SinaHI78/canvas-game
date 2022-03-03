@@ -17,6 +17,12 @@ const playerSprite = new Image();
 playerSprite.src = '/images/Female 10-3.png';
 const dogBark = new Audio('/sounds/mixkit-dog-barking-twice-1.wav');
 const bellRing = new Audio('/sounds/mixkit-relaxing-bell-chime-3109.wav');
+const flagsInWind = new Audio(
+  '/sounds/zapsplat_foley_flag_blow_windy_pole_rope_hits_43582 (mp3cut.net)-3.mp3'
+);
+const omMani = new Audio('/sounds/OmManiShort.m4a');
+const tareMantra = new Audio('/sounds/OmTare.m4a');
+const vajrsasattvaMantra = new Audio('/sounds/VajrasattvaMantra.m4a');
 
 const clean = () => {
   context.clearRect(0, 0, width, height);
@@ -92,43 +98,100 @@ function drawPlayer() {
     gridSize,
     gridSize
   );
-}
-// declaring a new player that changes its look/image when moving
-/*function drawPlayer() {
-  const player = new Image();
-  if (player.dir === 'down') {
-    playerImage.onload = function () {
-      context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
-    };
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'up') {
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'right') {
-    player.src = '/images/Female 10-3.png';
-  } else if (player.dir === 'left') {
-    player.src = '/images/Female 10-3.png';
+
+  if (game.player.dir === 'up') {
+    context.drawImage(
+      playerSprite,
+      gridSize,
+      gridSize * 3,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
   }
-  // the onload function is like the addEventListener to preload the image
-  // and then draw it
-  playerImage.onload = function () {
-    context.drawImage(playerImage, 0, 0, 32, 32, x, y, 32, 32);
-  };
-}*/
+  if (game.player.dir === 'right') {
+    context.drawImage(
+      playerSprite,
+      gridSize,
+      gridSize * 2,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  }
+  if (game.player.dir === 'left') {
+    context.drawImage(
+      playerSprite,
+      gridSize,
+      gridSize * 1,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  }
+}
 
 function drawDog(dog) {
   let x = gridSize * dog.col;
   let y = gridSize * dog.row;
-  context.drawImage(
-    doggieSprite,
-    0,
-    256,
-    gridSize,
-    gridSize,
-    x,
-    y,
-    gridSize,
-    gridSize
-  );
+  if (dog.dir === 'down') {
+    context.drawImage(
+      doggieSprite,
+      gridSize * 1,
+      gridSize * 4,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  } else if (dog.dir === 'up') {
+    context.drawImage(
+      doggieSprite,
+      gridSize * 1,
+      gridSize * 2,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  } else if (dog.dir === 'left') {
+    context.drawImage(
+      doggieSprite,
+      gridSize,
+      gridSize * 3,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  } else if (dog.dir === 'right') {
+    context.drawImage(
+      doggieSprite,
+      gridSize * 1,
+      gridSize * 1,
+      gridSize,
+      gridSize,
+      x,
+      y,
+      gridSize,
+      gridSize
+    );
+  }
 }
 
 function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
@@ -197,6 +260,7 @@ function drawEverything() {
   drawDog(game.dog2);
   drawDog(game.dog3);
   drawDog(game.dog4);
+  drawDog(game.dog5);
   drawPrayerflags();
   updateScore();
   updateTime();

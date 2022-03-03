@@ -13,6 +13,7 @@ class Game {
     this.dog2 = new Doggies(canvas, 5, 0);
     this.dog3 = new Doggies(canvas, 8, 10);
     this.dog4 = new Doggies(canvas, 15, 4);
+    this.dog5 = new Doggies(canvas, 12, 8);
   }
   // function returns true when the tile is blocked (is contained in blockedGrid)
   isTileBlocked(destCol, destRow) {
@@ -38,8 +39,10 @@ class Game {
         this.player.row === this.dog2.row) ||
       (this.player.col === this.dog3.col &&
         this.player.row === this.dog3.row) ||
-      (this.player.col === this.dog4.col && //
-        this.player.row === this.dog4.row)
+      (this.player.col === this.dog4.col &&
+        this.player.row === this.dog4.row) ||
+      (this.player.col === this.dog5.col && //
+        this.player.row === this.dog5.row)
     ) {
       this.score -= 10;
       dogBark.play();
@@ -48,7 +51,12 @@ class Game {
 
   playerActions() {
     if (this.player.col === 5 && this.player.row === 7) {
-      if (bellRing.paused) {
+      if (
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
         this.score += 5;
         bellRing.play();
       }
@@ -57,40 +65,106 @@ class Game {
       (this.player.col === 16 && this.player.row === 1) ||
       (this.player.col === 17 && this.player.row === 1)
     ) {
-      if (!this.flag1) {
-        this.score += 20;
+      if (
+        !this.flag1 &&
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 25;
         this.flag1 = true;
-        //bellRing.play();
+        flagsInWind.play();
       }
     }
     if (
       (this.player.col === 15 && this.player.row === 2) ||
       (this.player.col === 16 && this.player.row === 2)
     ) {
-      if (!this.flag2) {
-        this.score += 20;
+      if (
+        !this.flag2 &&
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 25;
         this.flag2 = true;
-        //bellRing.play();
+        flagsInWind.play();
       }
     }
     if (
       (this.player.col === 17 && this.player.row === 2) ||
       (this.player.col === 18 && this.player.row === 2)
     ) {
-      if (!this.flag3) {
-        this.score += 20;
+      if (
+        !this.flag3 &&
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 25;
         this.flag3 = true;
-        //bellRing.play();
+        flagsInWind.play();
       }
     }
     if (
       (this.player.col === 16 && this.player.row === 3) ||
       (this.player.col === 17 && this.player.row === 3)
     ) {
-      if (!this.flag4) {
-        this.score += 20;
+      if (
+        !this.flag4 &&
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 25;
         this.flag4 = true;
-        //bellRing.play();
+        flagsInWind.play();
+      }
+    }
+    if (
+      (this.player.col === 1 && this.player.row === 4) ||
+      (this.player.col === 2 && this.player.row === 4)
+    ) {
+      if (
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 10;
+        omMani.play();
+      }
+    }
+    if (
+      (this.player.col === 13 && this.player.row === 10) ||
+      (this.player.col === 14 && this.player.row === 10)
+    ) {
+      if (
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 10;
+        omMani.play();
+      }
+    }
+    if (
+      (this.player.col === 11 && this.player.row === 17) ||
+      (this.player.col === 12 && this.player.row === 17)
+    ) {
+      if (
+        bellRing.paused &&
+        flagsInWind.paused &&
+        omMani.paused &&
+        tareMantra.paused
+      ) {
+        this.score += 15;
+        tareMantra.play();
       }
     }
   }
@@ -140,6 +214,7 @@ class Game {
     this.doggieMove(this.dog2);
     this.doggieMove(this.dog3);
     this.doggieMove(this.dog4);
+    this.doggieMove(this.dog5);
     this.checkCollision();
   }
 }
