@@ -1,3 +1,5 @@
+// adding class Player that extends the Character class
+// with properties added for movement and collision check
 class Player extends Character {
   constructor(game, col, row) {
     super(game, col, row);

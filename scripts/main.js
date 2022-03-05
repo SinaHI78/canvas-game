@@ -18,11 +18,10 @@ playerSprite.src = '/images/Female 10-3.png';
 const dogBark = new Audio('/sounds/mixkit-dog-barking-twice-1.wav');
 const bellRing = new Audio('/sounds/mixkit-relaxing-bell-chime-3109.wav');
 const flagsInWind = new Audio(
-  '/sounds/zapsplat_foley_flag_blow_windy_pole_rope_hits_43582 (mp3cut.net)-3.mp3'
+  '/sounds/zapsplat_foley_flag_blow_windy_pole_rope_cut.mp3'
 );
-const omMani = new Audio('/sounds/OmManiShort.m4a');
-const tareMantra = new Audio('/sounds/OmTare.m4a');
-const vajrsasattvaMantra = new Audio('/sounds/VajrasattvaMantra.m4a');
+const omManiShort = new Audio('/sounds/OmManiShort.m4a');
+const tareMantra = new Audio('/sounds/TareMantraNew.m4a');
 
 const clean = () => {
   context.clearRect(0, 0, width, height);
@@ -70,6 +69,7 @@ function getRealm(score) {
   return ' a buddha!';
 }
 
+// update score and time in playing screen
 function updateScore() {
   const scoreTag = document.getElementById('score');
   scoreTag.innerHTML = game.score;
@@ -83,7 +83,7 @@ function updateTime() {
 function drawBackground() {
   context.drawImage(backgroundImage, 0, 0, width, height);
 }
-
+// drawing player and adding different sprites for the movement
 function drawPlayer() {
   let x = gridSize * game.player.col;
   let y = gridSize * game.player.row;
@@ -140,6 +140,7 @@ function drawPlayer() {
   }
 }
 
+// drawing dog and adding different sprites for the movement
 function drawDog(dog) {
   let x = gridSize * dog.col;
   let y = gridSize * dog.row;
@@ -193,7 +194,7 @@ function drawDog(dog) {
     );
   }
 }
-
+// drawing prayer flags with a function to make the flag line hang down
 function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
   return {
     x: (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cp1x + t * t * ex,
@@ -206,7 +207,7 @@ function drawFlag(x, y) {
   context.moveTo(x, y);
   context.quadraticCurveTo(x + 32, y + 15, x + 60, y);
   context.stroke();
-
+  // drawing each single flag rectangle
   let flagPosition = getQuadraticXY(0.03, x, y, x + 32, y + 15, x + 60, y);
   //context.fillStyle = '#' + Math.floor(Math.random() * 16777215).toString(16);
   context.fillStyle = '#3e77b9';
@@ -266,6 +267,7 @@ function drawEverything() {
   updateTime();
 }
 
+// make the player move on keydown event
 window.addEventListener('keydown', (event) => {
   // Stop the default behavior (moving the screen to the left/up/right/down)
   event.preventDefault();
@@ -292,7 +294,6 @@ window.addEventListener('keydown', (event) => {
 
 function loop() {
   window.requestAnimationFrame(() => {
-    game.runLogic();
     drawEverything();
     loop();
   });

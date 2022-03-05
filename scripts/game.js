@@ -30,7 +30,7 @@ class Game {
     }
     return false;
   }
-
+  // checking collision between player and dogs
   checkCollision() {
     if (
       (this.player.col === this.dog1.col &&
@@ -49,12 +49,14 @@ class Game {
     }
   }
 
+  // activating all player actions like ringing bell, reciting,
+  // putting up prayer flags and calling the corresponding sounds and score
   playerActions() {
     if (this.player.col === 5 && this.player.row === 7) {
       if (
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 5;
@@ -69,7 +71,7 @@ class Game {
         !this.flag1 &&
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 25;
@@ -85,7 +87,7 @@ class Game {
         !this.flag2 &&
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 25;
@@ -101,7 +103,7 @@ class Game {
         !this.flag3 &&
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 25;
@@ -117,7 +119,7 @@ class Game {
         !this.flag4 &&
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 25;
@@ -132,11 +134,11 @@ class Game {
       if (
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 10;
-        omMani.play();
+        omManiShort.play();
       }
     }
     if (
@@ -146,11 +148,11 @@ class Game {
       if (
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 10;
-        omMani.play();
+        omManiShort.play();
       }
     }
     if (
@@ -160,7 +162,7 @@ class Game {
       if (
         bellRing.paused &&
         flagsInWind.paused &&
-        omMani.paused &&
+        omManiShort.paused &&
         tareMantra.paused
       ) {
         this.score += 15;
@@ -168,7 +170,8 @@ class Game {
       }
     }
   }
-
+  // start function deleting the flags, setting the player,
+  // setting the timer counting down and making the dogs move
   start() {
     this.time = 120;
     this.score = 0;
@@ -194,8 +197,7 @@ class Game {
     clearInterval(this.dogInterval);
   }
 
-  runLogic() {}
-
+  // function to make the dogs move randomly
   doggieMove(dog) {
     let randomNum = Math.random();
     if (randomNum < 0.25) {
@@ -209,6 +211,7 @@ class Game {
     }
   }
 
+  // function to call the doggieMove function for every dog
   moveDog() {
     this.doggieMove(this.dog1);
     this.doggieMove(this.dog2);
