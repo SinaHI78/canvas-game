@@ -1,3 +1,6 @@
+// creating class Character that checks for the blocked tiles
+// in the isTileBlocked function and move the character according to the
+// move functions
 class Character {
   constructor(game, col, row) {
     this.col = col;
