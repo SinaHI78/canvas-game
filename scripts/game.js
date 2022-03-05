@@ -51,6 +51,10 @@ class Game {
 
   // activating all player actions like ringing bell, reciting,
   // putting up prayer flags and calling the corresponding sounds and score
+  // when player is at a certain row/col of the grid
+  // and the former action sound has ceased
+
+  // bell
   playerActions() {
     if (this.player.col === 5 && this.player.row === 7) {
       if (
@@ -63,6 +67,7 @@ class Game {
         bellRing.play();
       }
     }
+    // flags 1-4
     if (
       (this.player.col === 16 && this.player.row === 1) ||
       (this.player.col === 17 && this.player.row === 1)
@@ -127,6 +132,7 @@ class Game {
         flagsInWind.play();
       }
     }
+    // Mani mantra at two temples
     if (
       (this.player.col === 1 && this.player.row === 4) ||
       (this.player.col === 2 && this.player.row === 4)
@@ -155,6 +161,7 @@ class Game {
         omManiShort.play();
       }
     }
+    // Tare mantra at one temple - more points
     if (
       (this.player.col === 11 && this.player.row === 17) ||
       (this.player.col === 12 && this.player.row === 17)
@@ -170,7 +177,7 @@ class Game {
       }
     }
   }
-  // start function deleting the flags, setting the player,
+  // start function setting any flags to false, setting the player,
   // setting the timer counting down and making the dogs move
   start() {
     this.time = 120;

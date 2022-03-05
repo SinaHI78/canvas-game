@@ -10,11 +10,15 @@ const height = 640;
 const gridSize = 32;
 const game = new Game(canvas);
 
-// images and sound
+// images and sprites
 const backgroundImage = new Image();
 backgroundImage.src = '/images/level1.png';
 const playerSprite = new Image();
 playerSprite.src = '/images/Female 10-3.png';
+const doggieSprite = new Image();
+doggieSprite.src = '/images/PC Computer - Stardew Valley - Dog Blonde.png';
+
+// sounds
 const dogBark = new Audio('/sounds/mixkit-dog-barking-twice-1.wav');
 const bellRing = new Audio('/sounds/mixkit-relaxing-bell-chime-3109.wav');
 const flagsInWind = new Audio(
@@ -23,10 +27,12 @@ const flagsInWind = new Audio(
 const omManiShort = new Audio('/sounds/OmManiShort.m4a');
 const tareMantra = new Audio('/sounds/TareMantraNew.m4a');
 
+// function cleaning the canvas
 const clean = () => {
   context.clearRect(0, 0, width, height);
 };
 
+// start function
 function startGame() {
   startScreen.style.display = 'none';
   playingScreen.style.display = '';
@@ -34,16 +40,19 @@ function startGame() {
   game.start();
 }
 
+// stop function
 function stopGame() {
   startScreen.style.display = 'none';
   playingScreen.style.display = 'none';
   endScreen.style.display = '';
   game.stop();
+
   // set game end text
   document.getElementById('final-score').innerHTML = game.score;
   document.getElementById('realm').innerHTML = getRealm(game.score);
 }
 
+// setting the final result depending on the score
 function getRealm(score) {
   if (score < 0) {
     return ' a hell being!';
@@ -80,6 +89,7 @@ function updateTime() {
   timeTag.innerHTML = game.time;
 }
 
+// drawing the grid image
 function drawBackground() {
   context.drawImage(backgroundImage, 0, 0, width, height);
 }
@@ -194,7 +204,8 @@ function drawDog(dog) {
     );
   }
 }
-// drawing prayer flags with a function to make the flag line hang down
+
+// drawing the flag line with a function to make the it hang down
 function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
   return {
     x: (1 - t) * (1 - t) * sx + 2 * (1 - t) * t * cp1x + t * t * ex,
@@ -202,6 +213,7 @@ function getQuadraticXY(t, sx, sy, cp1x, cp1y, ex, ey) {
   };
 }
 
+// drawing the prayer flags
 function drawFlag(x, y) {
   context.beginPath();
   context.moveTo(x, y);
@@ -238,6 +250,8 @@ function drawFlag(x, y) {
   context.fillRect(flagPosition.x, flagPosition.y, 5, 8);
 }
 
+// function that calls the drawFlag function with certain parameters 
+// when the player actions allow it
 function drawPrayerflags() {
   if (game.flag1) {
     drawFlag(512, 25);
